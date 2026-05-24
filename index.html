@@ -553,7 +553,170 @@
                 </div>
             </div>
         </section>
-    
+    <!-- ==============================
+             REVIEWS SECTION
+             ============================== -->
+        <section id="reviews-section" class="py-28 relative z-10" style="background:var(--bg-secondary);border-top:1px solid var(--border-color);">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div>
+                        <p class="font-gaming text-sm tracking-widest mb-2" style="color:#00f3ff;">COMMUNITY CONSOLE</p>
+                        <h2 class="text-4xl md:text-5xl font-gaming font-bold mb-4" style="color:var(--text-primary);">PLAYER FEEDBACK</h2>
+                        <div style="height:2px;width:80px;background:#00f3ff;border-radius:2px;box-shadow:0 0 10px #00f3ff;"></div>
+                    </div>
+                    <button onclick="openReviewModal()"
+                            class="self-start md:self-auto px-6 py-3.5 font-gaming font-bold rounded-xl btn-neon text-sm border-2 transition-all"
+                            style="border-color:#00f3ff;color:#00f3ff;background:transparent;"
+                            onmouseover="this.style.background='#00f3ff';this.style.color='#000'"
+                            onmouseout="this.style.background='transparent';this.style.color='#00f3ff'">
+                        <i class="fa-solid fa-pen-nib mr-2"></i> WRITE A REVIEW
+                    </button>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap gap-2.5 mb-10 pb-4" style="border-bottom:1px solid var(--border-color);" id="filter-tabs">
+                    <button onclick="filterReviews('All')" class="tab-btn px-5 py-2.5 rounded-lg font-gaming text-xs tracking-wider border transition-all" data-filter="All"
+                            style="border-color:#00f3ff;background:rgba(0,243,255,0.12);color:var(--text-primary);">ALL STORIES</button>
+                    <button onclick="filterReviews('Neon Snake')" class="tab-btn px-5 py-2.5 rounded-lg font-gaming text-xs tracking-wider border transition-all" data-filter="Neon Snake"
+                            style="border-color:var(--border-color);color:var(--text-muted);">SNAKE</button>
+                    <button onclick="filterReviews('Cyber Pong')" class="tab-btn px-5 py-2.5 rounded-lg font-gaming text-xs tracking-wider border transition-all" data-filter="Cyber Pong"
+                            style="border-color:var(--border-color);color:var(--text-muted);">PONG</button>
+                    <button onclick="filterReviews('Cyber Runner')" class="tab-btn px-5 py-2.5 rounded-lg font-gaming text-xs tracking-wider border transition-all" data-filter="Cyber Runner"
+                            style="border-color:var(--border-color);color:var(--text-muted);">RUNNER</button>
+                    <button onclick="filterReviews('Neon Tic-Tac-Toe')" class="tab-btn px-5 py-2.5 rounded-lg font-gaming text-xs tracking-wider border transition-all" data-filter="Neon Tic-Tac-Toe"
+                            style="border-color:var(--border-color);color:var(--text-muted);">TIC-TAC-TOE</button>
+                </div>
+
+                <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==============================
+         REVIEW MODAL
+         ============================== -->
+    <div id="reviewModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-4"
+         style="background:rgba(0,0,0,0.88);backdrop-filter:blur(14px);">
+        <div class="w-full max-w-lg rounded-2xl p-6 md:p-8 relative glass-panel" style="border:1px solid #b026ff;">
+            <button onclick="closeReviewModal()" class="absolute top-4 right-4 text-xl p-2 transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="font-gaming text-2xl font-bold mb-1" style="color:var(--text-primary);">SUBMIT REVIEW</h3>
+            <p class="text-xs mb-6" style="color:var(--text-muted);">Your review will be logged publicly.</p>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-gaming text-[10px] tracking-widest mb-1.5 uppercase" style="color:#00f3ff;">Pilot Name</label>
+                    <input type="text" id="reviewName" required placeholder="Auto-filled from callsign"
+                           class="w-full rounded-lg py-3 px-4 text-sm focus:outline-none transition-all"
+                           style="background:var(--input-bg);border:1px solid var(--border-color);color:var(--text-primary);">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-gaming text-[10px] tracking-widest mb-1.5 uppercase" style="color:#00f3ff;">Game</label>
+                        <select id="reviewGame" class="w-full rounded-lg py-3 px-4 text-sm focus:outline-none"
+                                style="background:var(--input-bg);border:1px solid var(--border-color);color:var(--text-primary);">
+                            <option>Neon Snake</option>
+                            <option>Cyber Pong</option>
+                            <option>Cyber Runner</option>
+                            <option>Neon Tic-Tac-Toe</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-gaming text-[10px] tracking-widest mb-1.5 uppercase" style="color:#00f3ff;">Rating</label>
+                        <div class="flex gap-2 py-2.5" id="star-selector">
+                            <i class="fa-solid fa-star text-lg cursor-pointer star-select" style="color:#ff00ff;" data-value="1" onclick="setStarRating(1)"></i>
+                            <i class="fa-solid fa-star text-lg cursor-pointer star-select" style="color:#ff00ff;" data-value="2" onclick="setStarRating(2)"></i>
+                            <i class="fa-solid fa-star text-lg cursor-pointer star-select" style="color:#ff00ff;" data-value="3" onclick="setStarRating(3)"></i>
+                            <i class="fa-solid fa-star text-lg cursor-pointer star-select" style="color:#ff00ff;" data-value="4" onclick="setStarRating(4)"></i>
+                            <i class="fa-solid fa-star text-lg cursor-pointer star-select" style="color:#ff00ff;" data-value="5" onclick="setStarRating(5)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-gaming text-[10px] tracking-widest mb-1.5 uppercase" style="color:#00f3ff;">Review</label>
+                    <textarea id="reviewText" required rows="3" placeholder="Share your experience..."
+                              class="w-full rounded-lg py-3 px-4 text-sm focus:outline-none transition-all"
+                              style="background:var(--input-bg);border:1px solid var(--border-color);color:var(--text-primary);"></textarea>
+                </div>
+                <button onclick="submitReview()" class="w-full py-3.5 font-gaming font-black rounded-lg text-black btn-neon"
+                        style="background:#b026ff;box-shadow:0 0 18px rgba(176,38,255,0.4);">
+                    BROADCAST TRANSMISSION
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+    <footer class="relative z-10 pt-16 pb-8 glass-panel" style="border-top:1px solid var(--border-color);background:var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-gamepad text-3xl" style="color:#b026ff;"></i>
+                        <span class="font-gaming text-2xl font-bold" style="color:var(--text-primary);">NEXUS<span style="color:#00f3ff;" class="font-black">.GG</span></span>
+                    </div>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-secondary);">Next-gen arcade experiences with HTML5 engines, responsive systems, and retro synthesizer audio.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center transition-colors" style="color:var(--text-muted);"
+                           onmouseover="this.style.color='#00f3ff'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center transition-colors" style="color:var(--text-muted);"
+                           onmouseover="this.style.color='#b026ff'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg glass-panel flex items-center justify-center transition-colors" style="color:var(--text-muted);"
+                           onmouseover="this.style.color='#ff00ff'" onmouseout="this.style.color='var(--text-muted)'"><i class="fa-brands fa-twitch"></i></a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-gaming text-sm tracking-widest uppercase border-l-2 pl-3" style="color:var(--text-primary);border-color:#00f3ff;">ARCADE RUNDOWN</h4>
+                    <ul class="space-y-2.5 text-sm" style="color:var(--text-secondary);">
+                        <li><a href="games\snake\snake.html" class="transition-colors hover:text-[#39ff14]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#39ff14;"></i>Neon Snake</a></li>
+                        <li><a href="games\pong\pong.html" class="transition-colors hover:text-[#00f3ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#00f3ff;"></i>Cyber Pong</a></li>
+                        <li><a href="games\runner\runner.html" class="transition-colors hover:text-[#ff5e00]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#ff5e00;"></i>Cyber Runner</a></li>
+                        <li><a href="games\tictactoe\tictactoe.html" class="transition-colors hover:text-[#b026ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#b026ff;"></i>Neon Tic-Tac-Toe</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-gaming text-sm tracking-widest uppercase border-l-2 pl-3" style="color:var(--text-primary);border-color:#ff00ff;">PLATFORM LINKS</h4>
+                    <ul class="space-y-2.5 text-sm" style="color:var(--text-secondary);">
+                        <li><a href="games.html" class="hover:text-white transition-colors">Full Game Library</a></li>
+                        <li><a href="leader_board.html" class="hover:text-white transition-colors">🏆 Leaderboard</a></li>
+                        <li><a href="#reviews-section" class="hover:text-white transition-colors">Player Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-gaming text-sm tracking-widest uppercase border-l-2 pl-3" style="color:var(--text-primary);border-color:#b026ff;">TRANSMISSION UPDATES</h4>
+                    <p class="text-xs leading-relaxed" style="color:var(--text-secondary);">Subscribe for system alerts, live-build upgrades, and new game integrations.</p>
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <input type="email" id="newsletter-email" required placeholder="PILOT_ADDR@DOMAIN.COM"
+                                   class="w-full rounded-lg py-2.5 pl-4 pr-10 text-xs focus:outline-none transition-all"
+                                   style="background:var(--input-bg);border:1px solid var(--border-color);color:var(--text-primary);">
+                            <button onclick="subscribeNewsletter()" class="absolute right-2 top-1/2 -translate-y-1/2 p-1 transition-colors" style="color:#b026ff;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#b026ff'">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p id="newsletter-status" class="text-[10px] font-gaming hidden" style="color:#39ff14;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-top:1px solid var(--border-color);">
+                <p class="text-xs" style="color:var(--text-muted);">&copy; 2026 NEXUS Gaming. All rights reserved.</p>
+                <div class="flex space-x-6 text-[11px] font-gaming" style="color:var(--text-muted);">
+                    <a href="#" class="hover:text-white transition-colors">PRIVACY</a>
+                    <a href="#" class="hover:text-white transition-colors">COOKIES</a>
+                    <a href="#" class="hover:text-white transition-colors">LICENSE</a>
+                </div>
+            </div>
+        </div>
+    </footer>    
 
     <!-- ==============================
          JAVASCRIPT
