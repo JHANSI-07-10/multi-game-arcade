@@ -34,14 +34,14 @@
             box-shadow: 0 0 20px rgba(255, 94, 0, 0.2), inset 0 0 30px rgba(255, 94, 0, 0.05);
         }
         /* Mobile Touch overlays - splitting screen in half for easy tapping */
-        .touch-left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; z-index: 5; }
-        .touch-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 5; }
+        .touch-left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; z-index: 5; pointer-events: none;}
+        .touch-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 5; pointer-events: none;}
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-center px-4 py-6">
 
     <div class="w-full max-w-md mx-auto flex justify-between items-end mb-4">
-        <a href="../games.html" class="text-gray-400 hover:text-white transition flex items-center gap-2 font-gaming text-sm z-20 relative">
+        <a href="../../games.html" class="text-gray-400 hover:text-white transition flex items-center gap-2 font-gaming text-sm z-20 relative">
             <i class="fa-solid fa-arrow-left"></i> Back
         </a>
         <h1 class="font-gaming text-2xl font-bold text-neon-orange tracking-widest text-shadow-orange text-center absolute left-0 right-0 pointer-events-none">CYBER RUNNER</h1>
