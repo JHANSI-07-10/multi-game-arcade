@@ -85,57 +85,123 @@
 <body class="font-rajdhani text-gray-100 overflow-x-hidden min-h-screen flex flex-col custom-scrollbar">
 
     <!-- Unified Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-cyber-dark/85 backdrop-blur-xl border-b border-white/10 px-4 py-3 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            
-            <!-- Logo Brand -->
-            <a href="index.html" class="flex items-center gap-2 group" onclick="playSynthSound(440, 'triangle', 0.1)">
-                <div class="relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-cyber-blue to-cyber-pink rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-300"></div>
-                    <div class="relative bg-black p-2 rounded-lg border border-white/10">
-                        <i class="fa-solid fa-gamepad text-cyber-blue text-lg group-hover:rotate-12 transition-transform duration-300"></i>
-                    </div>
-                </div>
-                <span class="font-orbitron font-black tracking-wider text-xl bg-gradient-to-r from-cyber-blue to-white bg-clip-text text-transparent">NEXUS<span class="text-cyber-pink">.GG</span></span>
-            </a>
+    <!-- ==============================
+     MAIN NAV
+     ============================== -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+     style="background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
 
-            <!-- Centered Core Navigation Links -->
-            <div class="hidden md:flex items-center gap-8 font-orbitron text-xs tracking-widest font-semibold">
-                <a href="index.html" class="text-gray-400 hover:text-white neon-glow-blue transition duration-300 py-2" onclick="playSynthSound(500, 'sine', 0.05)">HOME</a>
-                
-                <!-- Games Active Link with Underline Glow -->
-                <div class="relative py-2">
-                    <a href="games.html" class="text-cyber-blue font-bold">GAMES</a>
-                    <span class="absolute bottom-0 left-0 w-full h-[2px] bg-cyber-blue shadow-[0_0_8px_#00f0ff]"></span>
+            <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer">
+                    <i class="fa-solid fa-gamepad text-3xl animate-pulse" style="color:#b026ff;"></i>
+                    <span class="font-orbitron text-2xl font-bold tracking-wider text-white">
+                    NEXUS<span class="text-cyan-400 font-black">.GG</span>
+                    </span>
                 </div>
-                
-                <a href="index.html#features" class="text-gray-400 hover:text-white neon-glow-blue transition duration-300 py-2" onclick="playSynthSound(550, 'sine', 0.05)">FEATURES</a>
-                <a href="index.html#reviews-section" class="text-gray-400 hover:text-white neon-glow-blue transition duration-300 py-2" onclick="playSynthSound(600, 'sine', 0.05)">REVIEWS</a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-baseline space-x-8">
+                <a href="index.html"
+                   class="font-orbitron px-3 py-2 text-sm font-medium text-gray-400 hover:text-cyan-400 transition">
+                    Home
+                </a>
+
+                <!-- Active Link -->
+                <a href="games.html"
+                   class="font-orbitron px-3 py-2 text-sm font-medium text-cyan-400 border-b-2 border-cyan-400">
+                    Games
+                </a>
+
+                <a href="index.html#features"
+                   class="font-orbitron px-3 py-2 text-sm font-medium text-gray-400 hover:text-cyan-400 transition">
+                    Features
+                </a>
+
+                <a href="index.html#reviews-section"
+                   class="font-orbitron px-3 py-2 text-sm font-medium text-gray-400 hover:text-cyan-400 transition">
+                    Reviews
+                </a>
+
+                <a href="index.html#leaderboard"
+                   class="font-orbitron px-3 py-2 text-sm font-medium text-gray-400 hover:text-yellow-400 transition">
+                    🏆 Leaderboard
+                </a>
             </div>
 
-            <!-- Action Button & Hamburger Panel Toggle -->
-            <div class="flex items-center gap-4">
-                <a href="games.html" class="hidden sm:inline-flex relative group overflow-hidden px-5 py-2 rounded-lg font-orbitron text-xs font-bold tracking-widest text-black bg-gradient-to-r from-cyber-blue to-cyber-pink transition duration-300 transform active:scale-95 shadow-neon-blue hover:shadow-neon-pink" onclick="playSynthSound(880, 'sine', 0.15)">
-                    <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-                    <span class="relative flex items-center gap-1">LAUNCH ARCADE <i class="fa-solid fa-bolt text-[10px]"></i></span>
+            <!-- Right Side -->
+            <div class="hidden md:flex items-center gap-3">
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                        class="w-10 h-10 rounded-full border border-white/10 bg-white/5 text-white hover:border-purple-500 transition">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Pilot Tag -->
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 font-orbitron text-xs">
+                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                    SANA
+                </div>
+
+                <!-- Launch Button -->
+                <a href="games.html"
+                   class="border border-purple-500 px-6 py-2.5 rounded-full font-orbitron text-sm bg-purple-500/10 hover:bg-purple-500/20 transition">
+                    Launch Arcade
                 </a>
-                
-                <!-- Mobile Navigation Trigger -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-lg border border-white/10 hover:bg-white/5" aria-label="Toggle Menu">
-                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center gap-3">
+                <button class="w-9 h-9 rounded-full flex items-center justify-center border border-white/10 bg-white/5 text-white">
+                    <i class="fa-solid fa-moon text-sm"></i>
+                </button>
+
+                <button id="mobile-menu-btn" class="p-2 text-gray-300">
+                    <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
+    </div>
 
-        <!-- Mobile Navigation Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden mt-3 border-t border-white/5 pt-4 pb-2 space-y-3 font-orbitron tracking-widest text-sm px-2">
-            <a href="index.html" class="block text-gray-400 hover:text-white px-3 py-2 rounded-md hover:bg-white/5 transition-all">HOME</a>
-            <a href="games.html" class="block text-cyber-blue font-bold px-3 py-2 rounded-md bg-cyber-blue/10 transition-all">GAMES</a>
-            <a href="index.html#features" class="block text-gray-400 hover:text-white px-3 py-2 rounded-md hover:bg-white/5 transition-all">FEATURES</a>
-            <a href="index.html#reviews-section" class="block text-gray-400 hover:text-white px-3 py-2 rounded-md hover:bg-white/5 transition-all">REVIEWS</a>
-            <a href="games.html" class="block text-center text-black bg-gradient-to-r from-cyber-blue to-cyber-pink font-bold py-2.5 rounded-md hover:opacity-90 transition-all">LAUNCH ARCADE</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+         class="hidden md:hidden absolute w-full left-0 bg-[#07070f]/95 backdrop-blur-xl border-t border-white/10">
+        <div class="px-4 pt-4 pb-6 space-y-3">
+
+            <a href="index.html"
+               class="block px-3 py-2.5 rounded-md font-orbitron text-gray-300">
+                Home
+            </a>
+
+            <a href="games.html"
+               class="block px-3 py-2.5 rounded-md font-orbitron text-cyan-400">
+                Games
+            </a>
+
+            <a href="index.html#features"
+               class="block px-3 py-2.5 rounded-md font-orbitron text-gray-300">
+                Features
+            </a>
+
+            <a href="index.html#reviews-section"
+               class="block px-3 py-2.5 rounded-md font-orbitron text-gray-300">
+                Reviews
+            </a>
+
+            <a href="index.html#leaderboard"
+               class="block px-3 py-2.5 rounded-md font-orbitron text-yellow-400">
+                🏆 Leaderboard
+            </a>
+
+            <a href="games.html"
+               class="block w-full text-center font-orbitron font-bold py-3 rounded-lg text-black bg-gradient-to-r from-purple-500 to-cyan-400">
+                Launch Arcade
+            </a>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Main Content Grid -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 space-y-16">
