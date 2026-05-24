@@ -372,10 +372,10 @@
                 <!-- Desktop Links -->
                 <div class="hidden md:flex items-baseline space-x-8">
                     <a href="index.html" class="font-gaming px-3 py-2 text-sm font-medium nav-active">Home</a>
-                    <a href="games/games.html" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#b026ff]" style="color:var(--text-secondary);">Games</a>
+                    <a href="games.html" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#b026ff]" style="color:var(--text-secondary);">Games</a>
             
                     <a href="#reviews-section" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#b026ff]" style="color:var(--text-secondary);">Reviews</a>
-                    <a href="#leaderboard" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#ffe600]" style="color:var(--text-secondary);">🏆 Leaderboard</a>
+                    <a href="leader_board.html" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#ffe600]" style="color:var(--text-secondary);">🏆 Leaderboard</a>
                 </div>
 
                 <!-- Right Cluster -->
@@ -393,7 +393,7 @@
                         </button>
                     </div>
                     <!-- Launch btn -->
-                    <a href="games\games.html"
+                    <a href="games.html"
                        class="border font-gaming px-6 py-2.5 rounded-full btn-neon text-sm"
                        style="background:rgba(176,38,255,0.15);border-color:#b026ff;color:var(--text-primary);">
                         Launch Arcade
@@ -417,14 +417,14 @@
              style="background:var(--nav-bg);backdrop-filter:blur(18px);border-top:1px solid var(--border-color);">
             <div class="px-4 pt-4 pb-6 space-y-3">
                 <a href="index.html" class="block px-3 py-2.5 rounded-md font-gaming text-[#00f3ff]">Home</a>
-                <a href="games\games.html" class="block px-3 py-2.5 rounded-md font-gaming" style="color:var(--text-secondary);">Games</a>
+                <a href="games.html" class="block px-3 py-2.5 rounded-md font-gaming" style="color:var(--text-secondary);">Games</a>
                 <a href="#reviews-section" class="block px-3 py-2.5 rounded-md font-gaming" style="color:var(--text-secondary);" onclick="closeMobileMenu()">Reviews</a>
-                <a href="#leaderboard" class="block px-3 py-2.5 rounded-md font-gaming text-[#ffe600]" onclick="closeMobileMenu()">🏆 Leaderboard</a>
+                <a href="leader_board.html" class="block px-3 py-2.5 rounded-md font-gaming text-[#ffe600]" onclick="closeMobileMenu()">🏆 Leaderboard</a>
                 <div id="pilot-tag-mob" class="hidden px-3 py-2 font-gaming text-xs" style="color:#39ff14;">
                     🟢 PILOT: <span id="pilot-name-mob"></span>
                     <button onclick="signOut()" class="ml-2 text-red-400 text-[10px]">[ SIGN OUT ]</button>
                 </div>
-                <a href="games\games.html" class="block w-full text-center font-gaming font-bold py-3 rounded-lg text-black"
+                <a href="games.html" class="block w-full text-center font-gaming font-bold py-3 rounded-lg text-black"
                    style="background:linear-gradient(135deg,#b026ff,#00f3ff);">Launch Arcade</a>
             </div>
         </div>
@@ -464,20 +464,15 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row justify-center gap-4 px-4">
-                    <a href="games\games.html"
+                    <a href="games.html"
                        class="group relative px-10 py-4 rounded-xl font-gaming font-black text-lg tracking-wider text-black btn-neon"
                        style="background:linear-gradient(135deg,#b026ff,#00f3ff);box-shadow:0 0 30px rgba(176,38,255,0.4);">
                         Explore Arcade <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#leaderboard"
+                    <a href="leader_board.html"
                        class="px-10 py-4 glass-panel rounded-xl font-gaming text-lg tracking-wider btn-neon flex items-center justify-center gap-2"
                        style="color:var(--text-primary);border-color:rgba(255,230,0,0.3);">
                         🏆 Leaderboard
-                    </a>
-                    <a href="#features"
-                       class="px-10 py-4 glass-panel rounded-xl font-gaming text-lg tracking-wider btn-neon flex items-center justify-center gap-2"
-                       style="color:var(--text-primary);">
-                        Platform Intel <i class="fa-solid fa-circle-info"></i>
                     </a>
                 </div>
 
@@ -679,18 +674,18 @@
                 <div class="space-y-4">
                     <h4 class="font-gaming text-sm tracking-widest uppercase border-l-2 pl-3" style="color:var(--text-primary);border-color:#00f3ff;">ARCADE RUNDOWN</h4>
                     <ul class="space-y-2.5 text-sm" style="color:var(--text-secondary);">
-                        <li><a href="multi-game-arcade\games\snake\snake.html" class="transition-colors hover:text-[#39ff14]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#39ff14;"></i>Neon Snake</a></li>
-                        <li><a href="multi-game-arcade\games\pong\pong.html" class="transition-colors hover:text-[#00f3ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#00f3ff;"></i>Cyber Pong</a></li>
-                        <li><a href="multi-game-arcade\games\runner\runner.html" class="transition-colors hover:text-[#ff5e00]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#ff5e00;"></i>Cyber Runner</a></li>
-                        <li><a href="multi-game-arcade\games\tictactoe\tictactoe.html" class="transition-colors hover:text-[#b026ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#b026ff;"></i>Neon Tic-Tac-Toe</a></li>
+                        <li><a href="games\snake\snake.html" class="transition-colors hover:text-[#39ff14]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#39ff14;"></i>Neon Snake</a></li>
+                        <li><a href="games\pong\pong.html" class="transition-colors hover:text-[#00f3ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#00f3ff;"></i>Cyber Pong</a></li>
+                        <li><a href="games\runner\runner.html" class="transition-colors hover:text-[#ff5e00]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#ff5e00;"></i>Cyber Runner</a></li>
+                        <li><a href="games\tictactoe\tictactoe.html" class="transition-colors hover:text-[#b026ff]"><i class="fa-solid fa-angles-right text-[10px] mr-2" style="color:#b026ff;"></i>Neon Tic-Tac-Toe</a></li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
                     <h4 class="font-gaming text-sm tracking-widest uppercase border-l-2 pl-3" style="color:var(--text-primary);border-color:#ff00ff;">PLATFORM LINKS</h4>
                     <ul class="space-y-2.5 text-sm" style="color:var(--text-secondary);">
-                        <li><a href="multi-game-arcade\games\games.html" class="hover:text-white transition-colors">Full Game Library</a></li>
-                        <li><a href="#leaderboard" class="hover:text-white transition-colors">🏆 Leaderboard</a></li>
+                        <li><a href="games.html" class="hover:text-white transition-colors">Full Game Library</a></li>
+                        <li><a href="leader_board.html" class="hover:text-white transition-colors">🏆 Leaderboard</a></li>
                         <li><a href="#reviews-section" class="hover:text-white transition-colors">Player Reviews</a></li>
                     </ul>
                 </div>
