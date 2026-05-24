@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Gaming | Global Leaderboards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rajdhani', 'sans-serif'],
+                        gaming: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#07070f',
+                        darker: '#03030a',
+                        neon: {
+                            purple: '#b026ff',
+                            blue: '#00f3ff',
+                            pink: '#ff00ff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #03030a;
+            color: #ffffff;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(176, 38, 255, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+        
+        .glass-panel {
+            background: rgba(11, 15, 25, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neon-text-glow {
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        .neon-border-glow:hover {
+            box-shadow: 0 0 25px rgba(176, 38, 255, 0.2);
+            border-color: rgba(176, 38, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased pb-16">
+
+    <nav id="navbar" class="sticky top-0 z-50 w-full transition-all duration-300 border-b border-white/5 bg-[#03030a]/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neon-purple to-neon-blue p-[1px] shadow-[0_0_15px_rgba(176,38,255,0.4)]">
+                            <div class="w-full h-full bg-darker rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-gamepad text-sm text-neon-blue group-hover:rotate-12 transition-transform"></i>
+                            </div>
+                        </div>
+                        <span class="font-gaming font-black text-xl tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-neon-blue">
+                            Nexus<span class="text-neon-purple">Gaming</span>
+                        </span>
+                    </a>
+                </div>
+                <!-- Desktop Links -->
+                <div class="hidden md:flex items-baseline space-x-8">
+                    <a href="index.html" class="font-gaming px-3 py-2 text-sm font-medium nav-active">Home</a>
+                    <a href="games.html" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#b026ff]" style="color:var(--text-secondary);">Games</a>
+                    <a href="index.html#reviews-section" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#b026ff]" style="color:var(--text-secondary);">Reviews</a>
+                    <a href="leader_board.html" class="font-gaming px-3 py-2 text-sm font-medium transition-colors hover:text-[#ffe600]" style="color:var(--text-secondary);">🏆 Leaderboard</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-2 font-gaming font-bold px-5 py-2.5 rounded-lg text-sm transition-all duration-300 hover:scale-105 border border-neon-blue/30 text-neon-blue bg-neon-blue/5 hover:bg-neon-blue/20">
+                        <i class="fa-solid fa-house text-xs"></i> Return Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-4 pt-16 text-center">
+        <h1 class="font-gaming font-black text-4xl md:text-5xl tracking-tight uppercase mb-4">
+            Leaderboard <span class="bg-clip-text text-transparent bg-gradient-to-r from-neon-purple to-neon-blue">Matrix</span>
+        </h1>
+        <p class="text-gray-400 font-medium max-w-xl mx-auto text-base md:text-lg tracking-wide uppercase font-gaming text-xs text-neon-blue neon-text-glow">
+            // LIVE ARCADE TERMINAL CHRONICLES
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 mt-14 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <section class="glass-panel neon-border-glow rounded-2xl p-6 transition-all duration-300">
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl filter drop-shadow-[0_0_8px_rgba(176,38,255,0.6)]">🏓</span>
+                    <h2 class="font-gaming font-black text-xl tracking-wider text-white uppercase">Cyber Pong</h2>
+                </div>
+                <span class="text-[10px] font-gaming text-neon-purple font-black uppercase tracking-widest bg-neon-purple/10 px-3 py-1 rounded border border-neon-purple/20">Velocity Mode</span>
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-400 text-lg">01</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">PILOT_ZERO</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">99 PTS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-slate-400 text-lg">02</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">SHADOW_RUSH</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">84 PTS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-700 text-lg">03</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">CYBER_PUNK</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">71 PTS</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel neon-border-glow rounded-2xl p-6 transition-all duration-300">
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl filter drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">🐍</span>
+                    <h2 class="font-gaming font-black text-xl tracking-wider text-white uppercase">Neon Snake</h2>
+                </div>
+                <span class="text-[10px] font-gaming text-neon-blue font-black uppercase tracking-widest bg-neon-blue/10 px-3 py-1 rounded border border-neon-blue/20">Grid System</span>
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-400 text-lg">01</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">NEO_MATRIX</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">1,420 PTS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-slate-400 text-lg">02</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">ANACONDA_99</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">1,150 PTS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-700 text-lg">03</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">SHADOW_RUSH</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">980 PTS</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel neon-border-glow rounded-2xl p-6 transition-all duration-300">
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl filter drop-shadow-[0_0_8px_rgba(255,0,255,0.6)]">🏃</span>
+                    <h2 class="font-gaming font-black text-xl tracking-wider text-white uppercase">Cyber Runner</h2>
+                </div>
+                <span class="text-[10px] font-gaming text-neon-pink font-black uppercase tracking-widest bg-neon-pink/10 px-3 py-1 rounded border border-neon-pink/20">Vector Force</span>
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-400 text-lg">01</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">SONIC_SPEED</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">14,890 M</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-slate-400 text-lg">02</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">JUMPER_BOI</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">12,400 M</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-700 text-lg">03</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">X_ROBO_X</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">10,110 M</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel neon-border-glow rounded-2xl p-6 transition-all duration-300">
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl filter drop-shadow-[0_0_8px_rgba(0,243,255,0.6)]">❌</span>
+                    <h2 class="font-gaming font-black text-xl tracking-wider text-white uppercase">Tic Tac Toe</h2>
+                </div>
+                <span class="text-[10px] font-gaming text-neon-blue font-black uppercase tracking-widest bg-neon-blue/10 px-3 py-1 rounded border border-neon-blue/20">Matrix Match</span>
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-400 text-lg">01</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">GRAND_MASTER</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">45 WINS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-slate-400 text-lg">02</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">SHADOW_RUSH</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">38 WINS</span>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-white/[0.02] rounded-xl border border-white/[0.03]">
+                    <div class="flex items-center gap-4">
+                        <span class="w-6 font-gaming font-black text-amber-700 text-lg">03</span>
+                        <span class="font-gaming font-bold text-sm tracking-widest text-gray-200">AI_CRUSHER</span>
+                    </div>
+                    <span class="font-gaming font-black text-neon-blue neon-text-glow text-sm">31 WINS</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center mt-20 text-gray-600 font-gaming text-[10px] tracking-widest uppercase">
+        &copy; 2026 NEXUS GAMING SYSTEM. ALL LOGS SECURED REVOLUTION ONLINE.
+    </footer>
+
+</body>
+</html>
