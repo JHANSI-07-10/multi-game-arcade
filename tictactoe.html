@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon Tic-Tac-Toe | Nexus Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], gaming: ['Orbitron', 'sans-serif'] },
+                    colors: {
+                        dark: '#0a0a0c',
+                        neon: { pink: '#ff00ff', blue: '#00f3ff', purple: '#b026ff' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="games\css\tictactoe.css">
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="w-full max-w-md flex justify-between items-center mb-8">
+        <a href="../games.html" class="text-gray-400 hover:text-white transition flex items-center gap-2 font-gaming text-sm">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+        <h1 class="font-gaming text-2xl font-bold text-neon-purple tracking-widest text-shadow-purple">TIC-TAC-TOE</h1>
+        <div class="w-16"></div> </div>
+
+    <div class="text-center mb-6 h-8">
+        <p id="statusText" class="font-gaming text-xl text-white tracking-widest">PLAYER (X) TURN</p>
+    </div>
+
+    <div class="relative w-full max-w-md">
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div id="gameModal" class="absolute inset-0 glass-panel flex flex-col items-center justify-center z-10 rounded-2xl hidden">
+            <h2 id="modalTitle" class="text-4xl font-gaming font-bold mb-2"></h2>
+            <p id="modalSubtitle" class="text-gray-400 mb-8"></p>
+            <div class="flex gap-4">
+                <button onclick="startGame('PvAI')" class="px-6 py-3 bg-neon-purple/20 border border-neon-purple text-white font-gaming rounded-lg hover:bg-neon-purple hover:text-black transition-all">
+                    PLAY A.I.
+                </button>
+                <button onclick="startGame('PvP')" class="px-6 py-3 bg-transparent border border-gray-600 text-gray-300 font-gaming rounded-lg hover:bg-gray-800 transition-all">
+                    LOCAL PvP
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="games\js\tictactoe.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Runner | Nexus Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], gaming: ['Orbitron', 'sans-serif'] },
+                    colors: {
+                        dark: '#0a0a0c',
+                        neon: { orange: '#ff5e00', purple: '#b026ff', blue: '#00f3ff', red: '#ff2a2a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="games\css\runner.css">
+</head>
+<body class="min-h-screen flex flex-col justify-center px-4 py-6">
+
+    <div class="w-full max-w-[400px] mx-auto flex justify-between items-end mb-3 px-2">
+        <a href="../games.html" class="text-gray-400 hover:text-white transition flex items-center gap-2 font-gaming text-xs">
+            <i class="fa-solid fa-arrow-left"></i> Arcade
+        </a>
+        <h1 class="font-gaming text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neon-orange via-neon-purple to-neon-blue tracking-widest text-center">CYBER RUNNER</h1>
+        <div id="liveScore" class="font-gaming text-sm text-neon-blue font-bold tracking-wider">00000</div>
+    </div>
+
+    <div class="canvas-container shadow-2xl mx-auto">
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        
+        <div class="touch-controls md:hidden">
+            <div id="btn-left" class="touch-btn"><i class="fa-solid fa-chevron-left"></i></div>
+            <div id="btn-right" class="touch-btn"><i class="fa-solid fa-chevron-right"></i></div>
+        </div>
+
+        <div id="startModal" class="absolute inset-0 glass-panel flex flex-col items-center justify-center z-10 rounded-xl px-6 text-center">
+            <div class="flex gap-2 mb-4 animate-pulse">
+                <div class="w-3 h-3 bg-neon-orange rounded-full shadow-[0_0_10px_#ff5e00]"></div>
+                <div class="w-3 h-3 bg-neon-purple rounded-full shadow-[0_0_10px_#b026ff]"></div>
+                <div class="w-3 h-3 bg-neon-blue rounded-full shadow-[0_0_10px_#00f3ff]"></div>
+            </div>
+            <h2 class="text-xl md:text-2xl font-gaming font-black text-white tracking-wider mb-2">VECTOR FORCE SHIFT</h2>
+            <p class="text-gray-400 text-xs font-sans max-w-xs mb-8">Evade oncoming firewall blocks inside the memory grid mainframe channel.</p>
+            <button onclick="startGame()" class="px-6 py-2.5 bg-transparent border border-neon-purple text-neon-purple font-gaming font-bold text-sm rounded-lg hover:bg-neon-purple hover:text-white transition-all shadow-[0_0_15px_rgba(176,38,255,0.3)] tracking-widest">
+                LOAD INSTANCE
+            </button>
+            <p class="text-gray-500 text-[10px] tracking-wider uppercase font-gaming mt-8 hidden md:block">Left/Right Arrows or A/D</p>
+            <p class="text-gray-500 text-[10px] tracking-wider uppercase font-gaming mt-8 md:hidden">Tap Overlay Panels to Swerve</p>
+        </div>
+
+        <div id="gameOverModal" class="hidden absolute inset-0 glass-panel flex flex-col items-center justify-center z-10 rounded-xl px-6 text-center">
+            <h2 class="text-3xl font-gaming font-black mb-1 text-neon-red drop-shadow-[0_0_10px_rgba(255,42,242,0.6)] tracking-widest">SYSTEM FLUSH</h2>
+            <p class="text-gray-400 font-gaming text-xs uppercase tracking-widest mb-6">Mainframe Corrupted</p>
+            
+            <div class="bg-white/5 border border-white/10 rounded-xl px-6 py-3 mb-8">
+                <div class="text-gray-500 font-gaming text-[10px] uppercase tracking-wider">Data Retained</div>
+                <div id="finalScore" class="text-3xl font-gaming font-black text-white">0</div>
+            </div>
+
+            <button onclick="resetGame()" class="px-6 py-2.5 bg-white/10 border border-white/20 text-white font-gaming font-bold text-sm rounded-lg hover:bg-white hover:text-black transition-all tracking-widest">
+                REBOOT CORE
+            </button>
+        </div>
+    </div>
+
+    <script src="games\js\runner.js"></script>
+</body>
+</html>
