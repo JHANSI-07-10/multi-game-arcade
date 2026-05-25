@@ -1,0 +1,45 @@
+/* Core Layout Context Background Rules */
+body {
+    background-color: #03030a;
+    color: #ffffff;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(176, 38, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 45%);
+    background-attachment: fixed;
+}
+
+/* Glassmorphism Structural Panels */
+.glass-panel {
+    background: rgba(11, 15, 25, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Text Box Shadow Illumination Layers */
+.neon-text-glow {
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+}
+
+/* Interaction Hover States Glow Rules */
+.neon-border-glow:hover {
+    box-shadow: 0 0 25px rgba(176, 38, 255, 0.2);
+    border-color: rgba(176, 38, 255, 0.3);
+}
+
+/* Base Configuration Rules For Dynamic Filtering UI Controls Elements */
+.filter-btn {
+    background: rgba(255, 255, 255, 0.01);
+    border-color: rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+}
+.filter-btn:hover {
+    border-color: #b026ff;
+    color: #ffffff;
+}
+.filter-btn.active {
+    background: rgba(176, 38, 255, 0.15);
+    border-color: #b026ff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
+}

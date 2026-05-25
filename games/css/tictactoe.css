@@ -1,0 +1,68 @@
+/* Core Document Presentation Rules */
+body { 
+    background-color: #0a0a0c; 
+    color: #fff; 
+    touch-action: manipulation; 
+}
+
+/* Glassmorphism Layout Layers */
+.glass-panel { 
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(176, 38, 255, 0.2); 
+}
+
+/* 3x3 Grid Matrix Board Layout */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(176, 38, 255, 0.1);
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(176, 38, 255, 0.15);
+}
+
+/* Grid Intersection Cell Rules */
+.cell {
+    aspect-ratio: 1;
+    background: #050505;
+    border: 2px solid rgba(176, 38, 255, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.cell:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(176, 38, 255, 0.8);
+}
+
+/* Character Vectors Neon Shaders */
+.cell.x { 
+    color: #ff00ff; 
+    text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff; 
+}
+
+.cell.o { 
+    color: #00f3ff; 
+    text-shadow: 0 0 15px #00f3ff, 0 0 30px #00f3ff; 
+}
+
+/* Win Alignment Line Highlighting Trigger Styles */
+.winning-cell {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    transform: scale(1.05);
+    z-index: 10;
+}

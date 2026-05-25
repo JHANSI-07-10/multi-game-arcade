@@ -1,0 +1,57 @@
+/* Base Layout Configuration Styles */
+body { 
+    background-color: #0a0a0c; 
+    color: #fff; 
+    touch-action: none; 
+    overflow: hidden; 
+}
+
+/* Glassmorphism Panel Layers */
+.glass-panel { 
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(0, 243, 255, 0.2); 
+}
+
+/* Canvas Viewport Dimensions Core Constraint */
+.canvas-container {
+    position: relative; 
+    width: 100%; 
+    max-width: 800px; 
+    margin: 0 auto;
+    aspect-ratio: 3/2; /* Widescreen feel */
+}
+
+#gameCanvas { 
+    background-color: #050505; 
+    width: 100%; 
+    height: 100%; 
+    display: block;
+    border: 2px solid #00f3ff; 
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 30px rgba(0, 243, 255, 0.05);
+}
+
+/* Touch Control Partition Mapping Layers for Mobile Handsets */
+.touch-zone { 
+    position: absolute; 
+    top: 0; 
+    width: 50%; 
+    height: 100%; 
+    z-index: 5; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.touch-half { 
+    flex: 1; 
+    opacity: 0; 
+}
+
+@media (max-width: 768px) { 
+    .touch-zone { display: flex; } 
+}
+
+@media (min-width: 769px) { 
+    .touch-zone { display: none; } 
+}

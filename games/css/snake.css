@@ -1,0 +1,10 @@
+/* Core Layout Context Background Rules */
+body {
+    background-color: #030712;
+    background-image: radial-gradient(circle at center, rgba(57, 255, 20, 0.03) 0%, transparent 70%);
+}
+
+/* Nav Item Dynamic Glow Transformations */
+.neon-glow:hover {
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+}
