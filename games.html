@@ -126,27 +126,21 @@
         </div>
 
         <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div class="game-card bg-cyber-card/40 border border-gray-800/60 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:border-cyber-green/40 transition-all duration-300" data-category="retro">
-                <div class="relative h-48 bg-gray-900 overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
-                    <i class="fa-solid fa-vector-square text-6xl text-cyber-green/20 group-hover:text-cyber-green/40 group-hover:scale-110 transition-all duration-500"></i>
-                    <span class="absolute top-4 right-4 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-md tracking-wider uppercase z-20">
-                        Retro Classic
-                    </span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col justify-between relative z-20 bg-cyber-card/60">
-                    <div>
-                        <h3 class="font-orbitron text-xl font-bold text-white mb-2 tracking-wide group-hover:text-cyber-green transition-colors">Neon Snake</h3>
-                        <p class="text-sm text-gray-400 mb-6 leading-relaxed font-light">Navigate the energy grid grid arrays. Avoid partition collisions and optimize growth sequencing loops.</p>
+                <!-- Game Card: snake -->
+                <div class="game-card group relative bg-cyber-card border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:border-cyber-pink hover:shadow-neon-pink flex flex-col justify-between" data-category="RETRO CLASSIC">
+                    <div class="absolute top-4 right-4 bg-cyber-pink/10 border border-cyber-pink/30 text-cyber-pink font-orbitron text-[10px] font-bold px-2.5 py-1 rounded-full">
+                        RETRO CLASSIC
                     </div>
-<<<<<<< HEAD
-                    <a href="snake.html" class="w-full text-center bg-gray-900 hover:bg-cyber-green hover:text-black text-gray-300 font-orbitron font-bold text-xs tracking-widest uppercase py-3.5 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 shadow-inner">
-                        Launch Engine <i class="fa-solid fa-terminal ml-1.5 text-[10px]"></i>
-                    </a>
-                </div>
-=======
-                    <a href="./games/snake/snake.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-green hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(523, 'sawtooth', 0.15)">
+                    <div>
+                        <div class="w-16 h-16 rounded-xl bg-cyber-pink/10 flex items-center justify-center border border-cyber-pink/20 mb-6 text-cyber-pink text-3xl group-hover:scale-110 transition-all duration-300">
+                            <i class="fa-solid fa-person-running"></i>
+                        </div>
+                        <h3 class="font-orbitron font-bold text-xl text-white group-hover:text-cyber-pink transition-colors mb-2 game-title">Neon Snake</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Navigate the energy grid grid arrays. Avoid partition collisions and optimize growth sequencing loops.
+                        </p>
+                    </div>
+                    <a href="snake.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-pink hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(659, 'sawtooth', 0.15)">
                         PLAY NOW <i class="fa-solid fa-play ml-1 text-[9px]"></i>
                     </a>
                 </div>
@@ -165,7 +159,7 @@
                             Test your reflexes in a high-voltage virtual tabletop hockey match against an intelligent AI driver.
                         </p>
                     </div>
-                    <a href="./games/pong/pong.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-blue hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(587, 'sawtooth', 0.15)">
+                    <a href="pong.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-blue hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(587, 'sawtooth', 0.15)">
                         PLAY NOW <i class="fa-solid fa-play ml-1 text-[9px]"></i>
                     </a>
                 </div>
@@ -184,7 +178,7 @@
                             Dodge barrier grids, slide under laser lines, and shift lanes dynamically in this arcade 3-lane endless-run setup.
                         </p>
                     </div>
-                    <a href="./games/runner/runner.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-pink hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(659, 'sawtooth', 0.15)">
+                    <a href="runner.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-pink hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(659, 'sawtooth', 0.15)">
                         PLAY NOW <i class="fa-solid fa-play ml-1 text-[9px]"></i>
                     </a>
                 </div>
@@ -203,73 +197,11 @@
                             Outsmart a highly optimized Minimax AI opponent on a premium interactive, neon grid coordinate.
                         </p>
                     </div>
-                    <a href="./games/tictactoe/tictactoe.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-purple hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(784, 'sawtooth', 0.15)">
+                    <a href="tictactoe.html" class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-purple hover:text-black border border-white/10 hover:border-transparent transition-all duration-300" onclick="playSynthSound(784, 'sawtooth', 0.15)">
                         PLAY NOW <i class="fa-solid fa-play ml-1 text-[9px]"></i>
                     </a>
                 </div>
-
->>>>>>> origin
             </div>
-
-            <div class="game-card bg-cyber-card/40 border border-gray-800/60 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:border-cyber-blue/40 transition-all duration-300" data-category="retro">
-                <div class="relative h-48 bg-gray-900 overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
-                    <i class="fa-solid fa-table-tennis-paddle-ball text-6xl text-cyber-blue/20 group-hover:text-cyber-blue/40 group-hover:scale-110 transition-all duration-500"></i>
-                    <span class="absolute top-4 right-4 bg-cyber-blue/10 border border-cyber-blue/30 text-cyber-blue text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-md tracking-wider uppercase z-20">
-                        Retro Classic
-                    </span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col justify-between relative z-20 bg-cyber-card/60">
-                    <div>
-                        <h3 class="font-orbitron text-xl font-bold text-white mb-2 tracking-wide group-hover:text-cyber-blue transition-colors">Cyber Pong</h3>
-                        <p class="text-sm text-gray-400 mb-6 leading-relaxed font-light">Execute kinetic paddle reflections against automated vector processing subroutines.</p>
-                    </div>
-                    <a href="pong.html" class="w-full text-center bg-gray-900 hover:bg-cyber-blue hover:text-black text-gray-300 font-orbitron font-bold text-xs tracking-widest uppercase py-3.5 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 shadow-inner">
-                        Launch Engine <i class="fa-solid fa-terminal ml-1.5 text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="game-card bg-cyber-card/40 border border-gray-800/60 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:border-cyber-orange/40 transition-all duration-300" data-category="action">
-                <div class="relative h-48 bg-gray-900 overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
-                    <i class="fa-solid fa-person-running text-6xl text-cyber-orange/20 group-hover:text-cyber-orange/40 group-hover:scale-110 transition-all duration-500"></i>
-                    <span class="absolute top-4 right-4 bg-cyber-orange/10 border border-cyber-orange/30 text-cyber-orange text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-md tracking-wider uppercase z-20">
-                        Action
-                    </span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col justify-between relative z-20 bg-cyber-card/60">
-                    <div>
-                        <h3 class="font-orbitron text-xl font-bold text-white mb-2 tracking-wide group-hover:text-cyber-orange transition-colors">Cyber Runner</h3>
-                        <p class="text-sm text-gray-400 mb-6 leading-relaxed font-light">Navigate three-lane routing matrices. Bypass physical firewalls and intercept metric arrays.</p>
-                    </div>
-                    <a href="runner.html" class="w-full text-center bg-gray-900 hover:bg-cyber-orange hover:text-black text-gray-300 font-orbitron font-bold text-xs tracking-widest uppercase py-3.5 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 shadow-inner">
-                        Launch Engine <i class="fa-solid fa-terminal ml-1.5 text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="game-card bg-cyber-card/40 border border-gray-800/60 rounded-2xl overflow-hidden shadow-lg flex flex-col group hover:border-cyber-purple/40 transition-all duration-300" data-category="casual">
-                <div class="relative h-48 bg-gray-900 overflow-hidden flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent z-10"></div>
-                    <i class="fa-solid fa-table-cells text-6xl text-cyber-purple/20 group-hover:text-cyber-purple/40 group-hover:scale-110 transition-all duration-500"></i>
-                    <span class="absolute top-4 right-4 bg-cyber-purple/10 border border-cyber-purple/30 text-cyber-purple text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-md tracking-wider uppercase z-20">
-                        Casual
-                    </span>
-                </div>
-                <div class="p-6 flex-grow flex flex-col justify-between relative z-20 bg-cyber-card/60">
-                    <div>
-                        <h3 class="font-orbitron text-xl font-bold text-white mb-2 tracking-wide group-hover:text-cyber-purple transition-colors">Neon Tic-Tac-Toe</h3>
-                        <p class="text-sm text-gray-400 mb-6 leading-relaxed font-light">Engage heuristic minimax logic arrays in a traditional 3x3 layout configuration framework.</p>
-                    </div>
-                    <a href="tictactoe.html" class="w-full text-center bg-gray-900 hover:bg-cyber-purple hover:text-black text-gray-300 font-orbitron font-bold text-xs tracking-widest uppercase py-3.5 rounded-xl border border-gray-800 group-hover:border-transparent transition-all duration-300 shadow-inner">
-                        Launch Engine <i class="fa-solid fa-terminal ml-1.5 text-[10px]"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
         <div id="empty-search-msg" class="hidden text-center py-24 bg-cyber-card/20 border border-gray-800/60 rounded-2xl mt-6">
             <i class="fa-solid fa-database text-5xl text-gray-700 mb-4 block"></i>
             <h3 class="font-orbitron text-lg font-bold text-gray-400 mb-1">NO CHANNELS FOUND</h3>
