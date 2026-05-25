@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Play Cyber Pong | Nexus Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], gaming: ['Orbitron', 'sans-serif'] },
+                    colors: {
+                        dark: '#0a0a0c',
+                        neon: { blue: '#00f3ff', pink: '#ff00ff' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0a0a0c; color: #fff; touch-action: none; overflow: hidden; }
+        .glass-panel { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(0, 243, 255, 0.2); }
+        .canvas-container {
+            position: relative; width: 100%; max-width: 800px; margin: 0 auto;
+            aspect-ratio: 3/2; /* Widescreen feel */
+        }
+        #gameCanvas { 
+            background-color: #050505; width: 100%; height: 100%; display: block;
+            border: 2px solid #00f3ff; border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 30px rgba(0, 243, 255, 0.05);
+        }
+        /* Touch zones for mobile */
+        .touch-zone { position: absolute; top: 0; width: 50%; height: 100%; z-index: 5; display: flex; flex-direction: column; }
+        .touch-half { flex: 1; opacity: 0; }
+        @media (max-width: 768px) { .touch-zone { display: flex; } }
+        @media (min-width: 769px) { .touch-zone { display: none; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center px-4 py-8">
+
+    <div class="w-full max-w-4xl mx-auto flex justify-between items-end mb-4 px-2">
+        <a href="../../games.html" class="text-gray-400 hover:text-white transition flex items-center gap-2 font-gaming text-sm">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+        <h1 class="font-gaming text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-pink tracking-widest text-center">CYBER PONG</h1>
+        <div class="text-right font-gaming text-xs text-gray-500">First to 5 wins</div>
+    </div>
+
+    <div class="canvas-container shadow-2xl">
+        <canvas id="gameCanvas" width="800" height="533"></canvas>
+        
+        <!-- Mobile Touch Overlays -->
+        <div class="touch-zone left-0" id="touch-left">
+            <div class="touch-half" id="touch-up"></div>
+            <div class="touch-half" id="touch-down"></div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startModal" class="absolute inset-0 glass-panel flex flex-col items-center justify-center z-10 rounded-xl">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-2 h-12 bg-neon-blue rounded"></div>
+                <div class="w-4 h-4 bg-white rounded-full"></div>
+                <div class="w-2 h-12 bg-neon-pink rounded"></div>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-gaming font-bold text-white mb-8">PLAYER VS A.I.</h2>
+            <button onclick="startGame()" class="px-8 py-3 bg-transparent border-2 border-neon-blue text-neon-blue font-gaming font-bold rounded-lg hover:bg-neon-blue hover:text-black transition-all shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+                ENTER ARENA
+            </button>
+            <p class="text-gray-400 text-sm mt-8 hidden md:block">Controls: W / S or Arrow Keys</p>
+            <p class="text-gray-400 text-sm mt-8 md:hidden">Controls: Tap Top/Bottom of Left Screen</p>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverModal" class="hidden absolute inset-0 glass-panel flex flex-col items-center justify-center z-10 rounded-xl">
+            <h2 id="winnerText" class="text-4xl md:text-5xl font-gaming font-black mb-6"></h2>
+            <button onclick="resetGame()" class="px-8 py-3 bg-white/10 border border-white text-white font-gaming rounded-lg hover:bg-white hover:text-black transition-all">
+                PLAY AGAIN
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const startModal = document.getElementById("startModal");
+        const gameOverModal = document.getElementById("gameOverModal");
+        const winnerText = document.getElementById("winnerText");
+
+        // Game Configuration
+        const WINNING_SCORE = 5;
+        let isPlaying = false;
+        let animationId;
+
+        // Entities
+        const player = { x: 20, y: canvas.height/2 - 50, width: 12, height: 100, score: 0, dy: 0, speed: 7, color: '#00f3ff' };
+        const ai = { x: canvas.width - 32, y: canvas.height/2 - 50, width: 12, height: 100, score: 0, speed: 5, color: '#ff00ff' };
+        const ball = { x: canvas.width/2, y: canvas.height/2, radius: 8, speed: 7, dx: 7, dy: 7, color: '#ffffff' };
+
+        // Input tracking
+        const keys = { w: false, s: false, ArrowUp: false, ArrowDown: false };
+
+        function drawRect(x, y, w, h, color, isGlow) {
+            ctx.fillStyle = color;
+            if(isGlow) {
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = color;
+            }
+            ctx.fillRect(x, y, w, h);
+            ctx.shadowBlur = 0;
+        }
+
+        function drawCircle(x, y, r, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = color;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawText(text, x, y, color) {
+            ctx.fillStyle = color;
+            ctx.font = "bold 60px 'Orbitron', sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(text, x, y);
+        }
+
+        function drawNet() {
+            ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+            for(let i = 0; i <= canvas.height; i += 30) {
+                ctx.fillRect(canvas.width/2 - 1, i, 2, 15);
+            }
+        }
+
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            // Reverse direction and randomize angle slightly
+            ball.dx = -ball.dx;
+            ball.dy = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 4 + 3);
+            ball.speed = 7; // Reset speed
+        }
+
+        function update() {
+            if(!isPlaying) return;
+
+            // Player Movement based on input
+            if(keys.w || keys.ArrowUp) player.y -= player.speed;
+            if(keys.s || keys.ArrowDown) player.y += player.speed;
+
+            // Boundaries for paddles
+            if(player.y < 0) player.y = 0;
+            if(player.y + player.height > canvas.height) player.y = canvas.height - player.height;
+            if(ai.y < 0) ai.y = 0;
+            if(ai.y + ai.height > canvas.height) ai.y = canvas.height - ai.height;
+
+            // Simple AI Logic: Follow the ball Y
+            let aiCenter = ai.y + ai.height/2;
+            if(aiCenter < ball.y - 15) {
+                ai.y += ai.speed;
+            } else if (aiCenter > ball.y + 15) {
+                ai.y -= ai.speed;
+            }
+
+            // Ball Movement
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Top and Bottom Wall Collision
+            if(ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                ball.dy = -ball.dy;
+            }
+
+            // Paddle Collision Logic
+            let paddle = (ball.x < canvas.width/2) ? player : ai;
+
+            // Check if ball hits paddle
+            if(ball.x - ball.radius < paddle.x + paddle.width && 
+               ball.x + ball.radius > paddle.x &&
+               ball.y + ball.radius > paddle.y && 
+               ball.y - ball.radius < paddle.y + paddle.height) {
+                
+                // Calculate hit point relative to center of paddle to add spin
+                let collidePoint = (ball.y - (paddle.y + paddle.height/2));
+                // Normalize it
+                collidePoint = collidePoint / (paddle.height/2);
+                
+                // Calculate angle in Radian (max 45 deg)
+                let angleRad = (Math.PI/4) * collidePoint;
+                
+                // Direction of ball based on which paddle hit it
+                let direction = (ball.x < canvas.width/2) ? 1 : -1;
+                
+                ball.dx = direction * ball.speed * Math.cos(angleRad);
+                ball.dy = ball.speed * Math.sin(angleRad);
+                
+                // Speed up ball slightly after every hit
+                ball.speed += 0.5;
+            }
+
+            // Score updates
+            if(ball.x - ball.radius < 0) {
+                ai.score++;
+                checkWin();
+                if(isPlaying) resetBall();
+            } else if(ball.x + ball.radius > canvas.width) {
+                player.score++;
+                checkWin();
+                if(isPlaying) resetBall();
+            }
+        }
+
+        function checkWin() {
+            if(player.score >= WINNING_SCORE || ai.score >= WINNING_SCORE) {
+                isPlaying = false;
+                if(player.score >= WINNING_SCORE) {
+                    winnerText.innerText = "VICTORY";
+                    winnerText.className = "text-5xl font-gaming font-black mb-6 text-neon-blue drop-shadow-[0_0_15px_rgba(0,243,255,0.8)]";
+                } else {
+                    winnerText.innerText = "DEFEAT";
+                    winnerText.className = "text-5xl font-gaming font-black mb-6 text-neon-pink drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]";
+                }
+                gameOverModal.classList.remove('hidden');
+            }
+        }
+
+        function draw() {
+            // Clear
+            ctx.fillStyle = "#050505";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawNet();
+            
+            // Draw Scores (faded in background)
+            drawText(player.score, canvas.width/4, 100, "rgba(0, 243, 255, 0.2)");
+            drawText(ai.score, 3*canvas.width/4, 100, "rgba(255, 0, 255, 0.2)");
+
+            // Draw Paddles
+            drawRect(player.x, player.y, player.width, player.height, player.color, true);
+            drawRect(ai.x, ai.y, ai.width, ai.height, ai.color, true);
+
+            // Draw Ball
+            drawCircle(ball.x, ball.y, ball.radius, ball.color);
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            if(isPlaying) {
+                animationId = requestAnimationFrame(gameLoop);
+            }
+        }
+
+        function startGame() {
+            startModal.classList.add('hidden');
+            gameOverModal.classList.add('hidden');
+            player.score = 0;
+            ai.score = 0;
+            player.y = canvas.height/2 - 50;
+            ai.y = canvas.height/2 - 50;
+            resetBall();
+            isPlaying = true;
+            gameLoop();
+        }
+
+        function resetGame() {
+            startGame();
+        }
+
+        // Controls Event Listeners
+        window.addEventListener('keydown', (e) => {
+            if(keys.hasOwnProperty(e.key)) keys[e.key] = true;
+        });
+        window.addEventListener('keyup', (e) => {
+            if(keys.hasOwnProperty(e.key)) keys[e.key] = false;
+        });
+
+        // Touch Control Implementation for Mobile
+        const touchUp = document.getElementById('touch-up');
+        const touchDown = document.getElementById('touch-down');
+
+        touchUp.addEventListener('touchstart', (e) => { e.preventDefault(); keys.w = true; });
+        touchUp.addEventListener('touchend', (e) => { e.preventDefault(); keys.w = false; });
+        
+        touchDown.addEventListener('touchstart', (e) => { e.preventDefault(); keys.s = true; });
+        touchDown.addEventListener('touchend', (e) => { e.preventDefault(); keys.s = false; });
+
+        // Initial render
+        draw();
+
+    </script>
+</body>
+</html>
