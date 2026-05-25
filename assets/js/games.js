@@ -1,4 +1,6 @@
-// Global Audio Synthesizer Controller Initialization
+// ==========================================
+// 1. GLOBAL AUDIO SYNTHESIZER CONTROLLER
+// ==========================================
 let synthAudioContext;
 
 function playSynthSound(frequency, oscillatorType, duration) {
@@ -28,7 +30,9 @@ function playSynthSound(frequency, oscillatorType, duration) {
     }
 }
 
-// Global Document Layout Tracking Subroutines
+// ==========================================
+// 2. LAYOUT & IDENTITY TRACKING
+// ==========================================
 window.addEventListener('load', () => {
     // Identity Synchronization Loop
     const localPilot = localStorage.getItem('nexus_pilot');
@@ -49,13 +53,39 @@ window.addEventListener('load', () => {
     }
 });
 
-// Category Filter Execution Grid Controller Logic
+// ==========================================
+// 3. MOBILE MENU TOGGLE
+// ==========================================
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+
+if (mobileMenuBtn && mobileMenu && menuIcon) {
+    mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-xmark');
+            playSynthSound(400, 'square', 0.1);
+        } else {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('fa-xmark');
+            menuIcon.classList.add('fa-bars');
+            playSynthSound(300, 'square', 0.1);
+        }
+    });
+}
+
+// ==========================================
+// 4. CORE SEARCH & CATEGORY FILTER ENGINE
+// ==========================================
 let activeFilter = 'all';
 
 function applyFilter(categoryString) {
     activeFilter = categoryString.toLowerCase();
     
-    // Update Tab Layout Control Indicators
+    // Update Tab Layout Control Buttons Active State
     const targetButtons = document.querySelectorAll('#filter-tab-container button');
     targetButtons.forEach(btn => {
         if (btn.getAttribute('data-filter') === activeFilter) {
@@ -68,7 +98,7 @@ function applyFilter(categoryString) {
     // Play Notification Audio Matrix Element
     playSynthSound(480, 'sine', 0.08);
     
-    // Execute Core Search Filtering Array Function
+    // Execute Core Filter Combination Array
     executeCatalogSearchQuery();
 }
 
@@ -79,12 +109,15 @@ function executeCatalogSearchQuery() {
     let visibleCount = 0;
 
     cards.forEach(card => {
-        const categoryAttr = card.getAttribute('data-category') || '';
+        const categoryAttr = (card.getAttribute('data-category') || '').toLowerCase();
         const titleText = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
         const descText = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
         
+        // Match settings
         const matchesQuery = titleText.includes(query) || descText.includes(query);
-        const matchesFilter = (activeFilter === 'all' || categoryAttr.toLowerCase() === activeFilter);
+        
+        // Flexible string includes evaluation (e.g. 'retro' matches 'RETRO CLASSIC')
+        const matchesFilter = (activeFilter === 'all' || categoryAttr.includes(activeFilter));
 
         if (matchesQuery && matchesFilter) {
             card.classList.remove('hidden');
@@ -94,31 +127,13 @@ function executeCatalogSearchQuery() {
         }
     });
 
-    // Handle empty result
+    // Handle empty result panel fallback
     const emptyMsg = document.getElementById('empty-search-msg');
-    if (visibleCount === 0) {
-        emptyMsg.classList.remove('hidden');
-    } else {
-        emptyMsg.classList.add('hidden');
+    if (emptyMsg) {
+        if (visibleCount === 0) {
+            emptyMsg.classList.remove('hidden');
+        } else {
+            emptyMsg.classList.add('hidden');
+        }
     }
 }
-
-// Mobile Menu Script Toggle
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-
-mobileMenuBtn.addEventListener('click', () => {
-    const isHidden = mobileMenu.classList.contains('hidden');
-    if (isHidden) {
-        mobileMenu.classList.remove('hidden');
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-xmark');
-        playSynthSound(400, 'square', 0.1);
-    } else {
-        mobileMenu.classList.add('hidden');
-        menuIcon.classList.remove('fa-xmark');
-        menuIcon.classList.add('fa-bars');
-        playSynthSound(300, 'square', 0.1);
-    }
-});
