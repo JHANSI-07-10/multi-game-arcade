@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-black flex items-center justify-center h-screen">
+
+    <div class="bg-gray-900 p-8 rounded-xl w-96">
+
+        <h1 class="text-white text-3xl font-bold mb-6 text-center">
+            Register
+        </h1>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            class="w-full p-3 mb-4 rounded bg-gray-800 text-white"
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            class="w-full p-3 mb-4 rounded bg-gray-800 text-white"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            class="w-full p-3 mb-4 rounded bg-gray-800 text-white"
+        >
+
+        <button
+            onclick="register()"
+            class="w-full bg-cyan-500 hover:bg-cyan-600 text-white p-3 rounded"
+        >
+            Register
+        </button>
+
+        <p class="text-gray-400 mt-4 text-center">
+            Already have account?
+            <a href="login.html" class="text-cyan-400">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+<script>
+
+async function register() {
+
+    const username =
+        document.getElementById("username").value;
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5500/api/auth/register",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    username,
+                    email,
+                    password
+
+                })
+
+            }
+        );
+
+        const data = await response.json();
+
+        alert(data.message);
+
+        window.location.href = "login.html";
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
