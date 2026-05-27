@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Snake - Nexus Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#030712',
+                            card: '#0b0f19',
+                            blue: '#00f0ff',
+                            pink: '#ff007f',
+                            green: '#39ff14',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="games\css\snake.css">
+</head>
+<body class="font-rajdhani text-gray-100 min-h-screen flex flex-col overflow-x-hidden select-none">
+
+    <nav class="sticky top-0 z-50 bg-cyber-dark/85 backdrop-blur-xl border-b border-white/10 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 group">
+                <div class="bg-black p-2 rounded-lg border border-white/10 relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyber-blue to-cyber-pink rounded-lg blur opacity-40 group-hover:opacity-100 transition"></div>
+                    <i class="fa-solid fa-gamepad text-cyber-blue text-lg relative"></i>
+                </div>
+                <span class="font-orbitron font-black text-xl tracking-wider">NEXUS<span class="text-cyber-pink">.GG</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 font-orbitron text-xs tracking-widest font-semibold">
+                <a href="index.html" class="text-gray-400 hover:text-white neon-glow transition">HOME</a>
+                <a href="games.html" class="text-gray-400 hover:text-white neon-glow transition">GAMES</a>
+                <a href="index.html#features" class="text-gray-400 hover:text-white neon-glow transition">FEATURES</a>
+                <a href="index.html#reviews-section" class="text-gray-400 hover:text-white neon-glow transition">REVIEWS</a>
+            </div>
+            <div>
+                <a href="games.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-orbitron text-xs font-bold bg-gradient-to-r from-cyber-blue to-cyber-pink text-black shadow-lg">
+                    BACK TO ARCADE <i class="fa-solid fa-reply text-[10px]"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-6">
+        <div class="w-full max-w-xl bg-cyber-card border border-white/10 rounded-2xl p-6 relative shadow-[0_0_50px_rgba(57,255,20,0.05)]">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="font-orbitron font-bold text-2xl text-cyber-green flex items-center gap-2">
+                        <i class="fa-solid fa-wave-square"></i> NEON SNAKE
+                    </h2>
+                </div>
+                <div class="flex gap-4 font-orbitron text-sm">
+                    <div class="text-gray-400">SCORE: <span id="score" class="text-white font-bold">0</span></div>
+                    <div class="text-gray-400">HIGH: <span id="high-score" class="text-cyber-green font-bold">0</span></div>
+                </div>
+            </div>
+
+            <div class="relative aspect-square w-full rounded-lg overflow-hidden border border-cyber-green/20 bg-black">
+                <canvas id="game-canvas" class="w-full h-full"></canvas>
+                
+                <div id="start-overlay" class="absolute inset-0 bg-black/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6">
+                    <i class="fa-solid fa-circle-play text-cyber-green text-6xl mb-4 animate-bounce"></i>
+                    <h3 class="font-orbitron font-black text-2xl mb-2 text-white">READY TO RUN?</h3>
+                    <p class="text-gray-400 text-sm max-w-xs mb-6">Navigate the glowing matrix grid, consume digital power cells, and avoid colliding into your own grid history stream.</p>
+                    <button onclick="startGame()" class="px-8 py-3 rounded-xl bg-cyber-green font-orbitron text-xs tracking-widest text-black font-black hover:scale-105 active:scale-95 transition">
+                        INITIALIZE ENGINE
+                    </button>
+                </div>
+
+                <div id="gameover-overlay" class="absolute inset-0 bg-black/95 backdrop-blur-sm hidden flex flex-col items-center justify-center text-center p-6">
+                    <i class="fa-solid fa-circle-exclamation text-cyber-pink text-6xl mb-4"></i>
+                    <h3 class="font-orbitron font-black text-2xl mb-2 text-white text-cyber-pink">CONNECTION TERMINATED</h3>
+                    <p class="text-gray-400 text-sm mb-6">Final Matrix Score: <span id="final-score" class="text-cyber-green font-bold text-lg">0</span></p>
+                    <button onclick="startGame()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyber-blue to-cyber-pink font-orbitron text-xs tracking-widest text-black font-black hover:scale-105 active:scale-95 transition">
+                        REBOOT CONNECTION
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 max-w-[200px] mx-auto mt-6">
+                <div></div>
+                <button onclick="changeDir('up')" class="h-12 w-12 rounded-lg bg-white/5 hover:bg-cyber-green/20 active:bg-cyber-green/40 border border-white/10 flex items-center justify-center mx-auto text-cyber-green"><i class="fa-solid fa-chevron-up"></i></button>
+                <div></div>
+                <button onclick="changeDir('left')" class="h-12 w-12 rounded-lg bg-white/5 hover:bg-cyber-green/20 active:bg-cyber-green/40 border border-white/10 flex items-center justify-center mx-auto text-cyber-green"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="flex items-center justify-center text-[10px] font-orbitron text-gray-500 font-bold">PAD</div>
+                <button onclick="changeDir('right')" class="h-12 w-12 rounded-lg bg-white/5 hover:bg-cyber-green/20 active:bg-cyber-green/40 border border-white/10 flex items-center justify-center mx-auto text-cyber-green"><i class="fa-solid fa-chevron-right"></i></button>
+                <div></div>
+                <button onclick="changeDir('down')" class="h-12 w-12 rounded-lg bg-white/5 hover:bg-cyber-green/20 active:bg-cyber-green/40 border border-white/10 flex items-center justify-center mx-auto text-cyber-green"><i class="fa-solid fa-chevron-down"></i></button>
+                <div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/10 bg-black/40 py-6 text-center text-gray-500 text-xs">
+        <p>&copy; 2026 NEXUS.GG. Swipe controls fully configured.</p>
+    </footer>
+
+    <script src="games\js\snake.js"></script>
+</body>
+</html>
