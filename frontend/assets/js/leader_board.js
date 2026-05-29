@@ -5,7 +5,7 @@ async function fetchLeaderboard() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5500/api/score/leaderboard"
+            "https://multi-game-arcade.onrender.com/api/score/leaderboard"
         );
 
         const data = await response.json();
