@@ -1,0 +1,65 @@
+body {
+
+    background: #030712;
+    color: white;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, sans-serif;
+
+}
+
+.game-title {
+
+    font-size: 3rem;
+    font-weight: bold;
+
+    color: cyan;
+
+    margin-bottom: 40px;
+
+}
+
+.game-board {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 100px);
+
+    gap: 15px;
+
+}
+
+.card {
+
+    width: 100px;
+    height: 100px;
+
+    background: cyan;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+
+    cursor: pointer;
+
+    color: black;
+
+    transition: 0.3s;
+
+}
+
+.card:hover {
+
+    transform: scale(1.05);
+
+}

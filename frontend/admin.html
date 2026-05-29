@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white min-h-screen p-10">
+
+    <h1 class="text-4xl font-bold mb-8 text-cyan-400">
+        Admin Panel
+    </h1>
+
+    <div class="max-w-xl space-y-4">
+
+        <input
+            id="gameTitle"
+            type="text"
+            placeholder="Game Title"
+            class="w-full p-3 rounded bg-gray-900 border border-cyan-500"
+        >
+
+        <input
+            id="gameImage"
+            type="text"
+            placeholder="Game Image URL"
+            class="w-full p-3 rounded bg-gray-900 border border-cyan-500"
+        >
+
+        <input
+            id="gameLink"
+            type="text"
+            placeholder="Game HTML File"
+            class="w-full p-3 rounded bg-gray-900 border border-cyan-500"
+        >
+
+        <button
+            onclick="addGame()"
+            class="bg-cyan-500 px-6 py-3 rounded font-bold"
+        >
+            Add Game
+        </button>
+
+    </div>
+
+    <script>
+
+        function addGame() {
+
+            const title =
+            document.getElementById("gameTitle").value;
+
+            const image =
+            document.getElementById("gameImage").value;
+
+            const link =
+            document.getElementById("gameLink").value;
+
+            const adminGames =
+            JSON.parse(localStorage.getItem("adminGames")) || [];
+
+            adminGames.push({
+                title,
+                image,
+                link
+            });
+
+            localStorage.setItem(
+                "adminGames",
+                JSON.stringify(adminGames)
+            );
+
+            alert("Game Added");
+        }
+
+    </script>
+
+</body>
+</html>

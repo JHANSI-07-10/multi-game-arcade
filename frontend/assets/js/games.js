@@ -137,3 +137,60 @@ function executeCatalogSearchQuery() {
         }
     }
 }
+
+
+
+// const gamesContainer =
+// document.getElementById("gamesContainer");
+
+
+const dynamicGamesContainer =
+document.getElementById("dynamic-games");
+
+const adminGames =
+JSON.parse(localStorage.getItem("adminGames")) || [];
+
+function renderAdminGames() {
+
+    if (!dynamicGamesContainer) return;
+
+    adminGames.forEach(game => {
+
+        dynamicGamesContainer.innerHTML += `
+
+            <div class="game-card group relative bg-cyber-card border border-cyber-green/30 rounded-2xl p-6 transition-all duration-300 hover:border-cyber-green flex flex-col justify-between">
+
+                <div class="absolute top-4 right-4 bg-cyber-green/10 border border-cyber-green/30 text-cyber-green font-orbitron text-[10px] font-bold px-2.5 py-1 rounded-full">
+                    ADMIN
+                </div>
+
+                <div>
+
+                     <img src="${game.image}" class="w-full h-48 object-cover rounded-xl mb-6">
+
+                    <h3 class="font-orbitron font-bold text-xl text-white mb-2">
+                        ${game.title}
+                    </h3>
+
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Dynamically added from admin panel.
+                    </p>
+
+                </div>
+
+                <a
+                    href="${game.link}"
+                    class="w-full text-center py-3 rounded-xl font-orbitron text-xs font-semibold tracking-wider bg-white/5 hover:bg-cyber-green hover:text-black border border-white/10 hover:border-transparent transition-all duration-300"
+                >
+                    PLAY NOW
+                </a>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+renderAdminGames();
